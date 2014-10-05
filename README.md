@@ -21,19 +21,18 @@ Get to know some features
 - tween opacity 
  
  
-Examples 
+Quick Example 
 ======
- <pre>
- //Simple example jTween syntax, very simple indeed
+ <pre>//Simple example jTween syntax, very simple indeed
  $('#selector').jTween({ to: { opacity: 0.5, translate: {y: 50} }, duration: 700 });
  </pre>
  
 Please notice that it's best to use a unique ID selector to perform an jTween animation,
 you don't want all your things to fly around.
  
-
-<pre> 
-// Complex example jTween syntax, with all supported features 
+Advanced Example
+======
+<pre> // Complex example jTween syntax, with all supported features 
 $('#selector').jTween({
 	from: {
 		opacity: 1,
@@ -58,24 +57,30 @@ $('#selector').jTween({
 });
 </pre>
 
-<pre>
-// Scroll to top of window
+
+ScrollTo Tweens
+======
+<pre>// Scroll to top of window
 $('#button').on('click', function() {
 	$('body').jTween({ to: { scroll: 0 } });
 });
 </pre>
 
-<pre>
-// Scroll to element when clicking anchor links
+<pre>// Scroll to element when clicking anchor links
 $('a#button').on('click', function(e) {
 	var target = $( $.attr(this, 'href') );
 	$('#element').jTween({ to: { scroll: $(target).offset().top } });
 });
 </pre>
 
-Known issues
+Known Issues
+======
 - tween transform translate only supports pixels as unit
 - tween chaining is not implemented
 - does not tween text properties, colors, spacing, etc, only what's shown in the complex jTween example
 - scroll events are only available for document.body, no other containers available
 - there is no way to stop tweens, pause rewind or control them via jTween
+
+License
+======
+Licensed under MIT
