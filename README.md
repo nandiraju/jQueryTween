@@ -7,12 +7,17 @@ About
 ======
 
 A simple plugin to easily bridge tween.js with jQuery, 
-so tween.js is not included into the jTween plugin
+so tween.js is not included into the jTween plugin.
+
+Why jTween
+======
+It's about 2k minified and plus 6k of tween.js, you can do a ton of cool things without the need to use expensive or complicated animation engines.
+This one is simple, light and I dare to say it's much more performance driven when it comes to simple tweens.
 
 Get to know some features
+======
 - works with jQuery, yes I know it's cool for n00bs and scary for advanced devs
 - can use all tween.js easing functions, can do delays and repeats, and more
-- supports 
 - supports callback function 
 - tween scrollTo events
 - tween transform translate2d or translate3d
@@ -53,7 +58,7 @@ $('#selector').jTween({
 }, function() {
 	//do some cool stuff when tween finished animating
 }, function() {
-	//do some cool stuff when tween finished animating
+	//do some cool stuff while tween is running 
 });
 </pre>
 
