@@ -27,7 +27,7 @@ h1 { letter-spacing: -3px; } h2 { letter-spacing: -2px; } h3 { letter-spacing: -
 	position: absolute; z-index: -1;
 	-webkit-transform-style: preserve-3d;
 	transform-style: preserve-3d;
-	-webkit-transform: translateY(-25%) rotateX(60deg) rotateZ(20deg);
+	-webkit-transform: translateY(-15%) rotateX(60deg) rotateZ(20deg);
 	transform: translateY(-15%) rotateX(60deg) rotateZ(20deg);		
 }
 
