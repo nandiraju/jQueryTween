@@ -1,52 +1,569 @@
 <!DOCTYPE html>
-<html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8"> 
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=500" />
+	<meta name="keywords" content="jQueryTween, tween.js, jQuery, example, tweening engine, animation engine" />
+	<meta name="author"	content="Dan Partac" />
+	
+	<title>jQueryTween - Lightest Tweening Engine for jQuery</title>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet'>	
 
-  <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="jTween : Lightest Tweening Engine for jQuery">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> <!-- JQUERY -->
+	
+	<link rel="stylesheet" href="../assets/css/bootstrap.min.css" type='text/css'> <!-- BOOTSTRAP AND FONTAWESOME -->
+	<link rel="stylesheet" href="../assets/css/theme.css" type='text/css'>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" type='text/css'>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+	
+	<script type="text/javascript" src="../src/jQueryTween-aio-min.js"></script>						<!-- jQueryTween AIO -->
+	
+	<script type="text/javascript" src="../assets/js/scripts.js"></script>	
+  	<script type="text/javascript" src="../assets/js/jquery.qrcode-0.7.0.min.js"></script>
+	
+</head>
+<body>
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+<div id="site-wrapper">
 
-    <title>jTween</title>
-  </head>
+	<header id="header">
+	  <div class="container">
+		<h1 class="pull-left">jQuery<strong>Tween</strong></h1>
+		<div id="mainnav" class="btn-toolbar pull-right" role="toolbar">
+		
+			<a id="donate-link" title="Please Donate" href="bitcoin:138F8t1gb5FYtTk6FqNbXCNBCkCx5JZon7" class="btn btn-donate donate-link" data-toggle="popover" data-placement="auto"><i class="fa fa-bitcoin"></i> Donate</a>
+			<a title="Download Now" href="https://github.com/thednp/jQueryTween/zipball/master" class="btn btn-success"><i class="fa fa-angle-double-down"></i> Download</a>
+		</div>
+	  </div>
+	</header>
+	
+	<div id="overview" class="jumbotron"><div class="parallax"></div>
+	  <div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<h1><small>Welcome to</small> jQuery<strong>Tween</strong>!!</h1>
+				<h2>The Lightest Tweening Engine for jQuery</h2>
+				<p class="lead">This plugin is a bridge to tween.js and aims to drastically simplify your work as a jQuery user. Now you don't have to write 3 functions over and over, just one line.</p>
+				<p>
+					<span class="btn-group">
+						<a title="Fork me on Github, would love to grow" href="https://github.com/thednp/jQueryTween" class="btn btn-jtween" target="_blank"><i class="fa fa-github"></i> Github</a>
+						<a title="Go to tween.js Github page" href="https://github.com/thednp/tweenjs" class="btn btn-default" target="_blank"><i class="fa fa-send-o"></i> Tween.js</a>
+						<a  title="What else I do?" href="http://themeforest.net/user/dnp_theme/portfolio?ref=dnp_theme" class="btn btn-primary" target="_blank"><i class="fa fa-paw"></i> My Work</a>
+					</span>	
+					
+					<a title="Do some fancy stuff to entertain me!!" class="btn btn-danger btn-play">Demo</a>
+				</p>
+			</div>
+			<div class="col-xs-12 col-sm-6 test-col">
+				<div class="img-wrapper">
+					<img alt="jQueryTween" class="jQueryTween" src="../assets/img/jQueryTween.png" />
+				</div>
+			</div>
+	     </div>
+	  </div>
+	</div>
 
-  <body>
+    <div class="container theme-showcase" role="main">
+  
+	<div class="row">
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/thednp/jTween">View on GitHub</a>
 
-          <h1 id="project_title">jTween</h1>
-          <h2 id="project_tagline">Lightest Tweening Engine for jQuery</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/thednp/jTween/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/thednp/jTween/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h3>
-<a name="welcome-to-jtween" class="anchor" href="#welcome-to-jtween"><span class="octicon octicon-link"></span></a>Welcome to jTween</h3>
-
-<p>More content coming soon</p>
+	<div class="col-xs-12 col-sm-9">
+	
+	
+      <section id="features">
+        <h2>jQuery<strong>Tween</strong> Features</h2>
+		<div class="row">
+			<div class="col-md-4 col-sm-6">
+			  <h4><i class="fa fa-plug"></i> Developer Friendly</h4>
+			  Using <a href="https://github.com/sole/tweenjs">tween.js</a> is now super duper easy with jQuery<strong>Tween</strong>, as it expands it's powers in many ways. It also comes with 2 special callbacks for your other Javascript functions.
+			</div>
+			<div class="col-md-4 col-sm-6">
+			  <h4><i class="fa fa-kbd"></i> Lightweight &amp; Modular</h4>
+			  jQuery<strong>Tween</strong> is only <kbd>5Kb</kbd>, and works as a controller for <a href="https://github.com/sole/tweenjs">tween.js</a> while this one is about <kbd>6Kb</kbd> and calculates the "between" values from an initial state to a target state based on easing functions. 
+			</div>
+			<div class="col-md-4 col-sm-6">
+			  <h4><i class="fa fa-database"></i> 17 Tween Properties</h4>
+			  Yes that's right! You can tween transform properties, scroll window, repositioning and even tween background position. Most properties accept multiple types of values, including percentage.
+			</div>
+			<div class="col-md-4 col-sm-6">
+			  <h4><i class="fa fa-certificate"></i> Friendly License</h4>
+			  jQuery<strong>Tween</strong> is completely <span class="label label-success">free</span> for commercial use. Deploy your awesome project right away.
+			</div>
+			<div class="col-md-4 col-sm-6">
+			  <h4><i class="fa fa-pencil"></i> Well Documented</h4>
+			  In a single page, jQuery<strong>Tween</strong> is showing it's strengths and also explaining it's behind the scenes coding.
+			</div>
+			<div class="col-md-4 col-sm-6">
+			  <h4><i class="fa fa-microphone"></i> Versatile Distribution</h4>
+			  jQuery<strong>Tween</strong> comes in 2 distribution formats. The AIO includes <a href="https://github.com/sole/tweenjs">tween.js</a> inside so you don't have to worry.
+			</div>
+			<div class="col-md-4 col-sm-6">
+			  <h4><i class="fa fa-gamepad"></i> Friend with Everybody</h4>
+			  Here's a perfect jQuery start-up environment with <a href="http://getbootstrap.com">Bootstrap</a>, and each script does what it does best.
+			</div>
+			<div class="col-md-8 col-sm-6">
+			  <h4><i class="fa fa-gears"></i> Smart Built. Performance Driven. Smooth Experience..</h4>
+			  Why not just using jQuery's <code>.animate()</code> functions, or some CSS3 tricks? It's about performance, flexibility and dynamics. Tweening engines makes it a more <kbd>smooth</kbd> experience and have built-in easing functions, jQuery doesn't. CSS3 cannot scroll the window and you don't need to write entire pages of CSS3 for various animation timings and delays, with jQuery<strong>Tween</strong> you write one line and it's done.
+			</div>
+		</div>			
       </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">jTween maintained by <a href="https://github.com/thednp">thednp</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
+	  
+      <section id="installation">
+        <h2>Installation</h2>
+	  <p>First, you need to <a title="Click to download" href="https://github.com/thednp/jQueryTween/zipball/master">download</a> the package at Github and copy the distribution that suits you to your assets folders. If you are using the AIO pack (all in one), you can add the following to your site and you are ready to go.</p>
+<pre>
+&lt;script type="text/javascript" src=".../assets/js/jQueryTween-aio-min.js"></script>
+</pre>
+	  <p>In other cases, you may need to have all files separate. So you need:</p>
+<pre>
+&lt;script type="text/javascript" src=".../assets/js/RequestAnimationFrame.js"></script>
+&lt;script type="text/javascript" src=".../assets/js/tween.min.js"></script>		
+&lt;script type="text/javascript" src=".../assets/js/jQueryTween.min.js"></script>
+</pre>
+	  <p>The basic jQueryTween syntax:</p>
+<pre>
+$('.selector').jQueryTween(options,callback,special);
+</pre>
+	  <p>The extrapolated syntax:</p>
+<pre>
+$('.selector').jQueryTween({
 
-    
+   //options
+  from	: {},
+	to	: {}, 
+	duration: 500,
+	delay	: 0,
+	yoyo	: false,
+	easing	: 'TWEEN.Easing.Linear.None'
+  },
+  
+  // callback when tween is finished
+  function() { 
+    //some cool function
+  },
+  
+  // special callback while tweening	
+  function() {
+    //another cool function
+  }
+);	
+</pre>
+		<p>In the examples below we are going to explore all the options and features in detail so stay tuned.</p>
+	 </section>
 
-  </body>
+
+
+      <section id="size-tween">
+        <h2>Tweening Object Size Example</h2>  
+	  
+		<div class="media">
+		  <div id="size-example" class="example-object pull-left"> </div>
+		  <div class="media-body">
+			  <p>In this example, the object is going to animate width, height or both with different tween instances. The example is using <code>yoyo</code> setting, which means that the object is animating to it's original setting.</p>
+			  <p>
+				  <a class="btn btn-jtween btn-lg btn-width" role="button">Width</a>
+				  <a class="btn btn-jtween btn-lg btn-height" role="button">Height</a>
+				  <a class="btn btn-jtween btn-lg btn-width-height" role="button">Both</a>
+			  </p>      
+		  </div>
+		</div>
+<pre>
+//first example
+$('.selector').jQueryTween({ to: { width: 150 }, yoyo: true });
+//second example
+$('.selector').jQueryTween({ to: { height: 150 }, yoyo: true });
+//third example
+$('.selector').jQueryTween({ to: { height: 150 }, yoyo: true, duration: 1500, easing: 'TWEEN.Easing.Cubic.Out' }); 
+$('.selector').jQueryTween({ to: { width: 150 }, yoyo: true, duration: 1000, delay: 500, easing: 'TWEEN.Easing.Bounce.In' });
+</pre>
+
+		<h4>Tips for usage</h4>
+		<ol type="a">
+		  <li>Animating object dimension can be tricky, especially if the object has paddings or borders. It works best on objects with clear formatting. If your object has padding you may need to set an initial value like <code>from: { width: $('.selector').outerHeight() }</code> and this is to make sure the animation is not "jumpy".</li>
+		  <li>Both width and height accept values such as 150, "150px" and "150%" but will always use the measurement unit of the target values, that's right, the <code>{ to: { width: '150px' } }</code> values.</li>
+		  <li>If you only do a simple width animation for instance, in most cases you don't need to specify an initial value, jQueryTween will measure it for you.</li>
+		  <li><kbd>TIP</kbd> | you can animate same object with 2 tweens at the same time, one for width and one for height, but with different options of delay, speed or easing. Just like in my demos.</li>
+		</ol>
+	  </section>
+
+	  
+      <section id="translate-tween">
+        <h2>Tweening Translate Example</h2>  
+	  
+		<div class="media" style="perspective: 400px; overflow: visible;">
+		  <div id="translate-example" class="example-object pull-left"> </div>
+		  <div class="media-body">
+			  <p>In this example, the object is going to translate or move left, right and backward. Translate is part of CSS3 transform, what you know as <code>transform: translateX(150px)</code>. Please know that for this example we have used a 400px perspective for the animated object container.</p>
+			  <p>
+				  <a class="btn btn-jtween btn-lg btn-trx" role="button">Translate X</a>
+				  <a class="btn btn-jtween btn-lg btn-try" role="button">Translate Y</a>
+				  <a class="btn btn-jtween btn-lg btn-trz" role="button">Translate Z</a>
+				  <a class="btn btn-jtween btn-lg btn-translate" role="button">Translate 3D</a>
+			  </p>      
+		  </div>
+		</div>
+<pre>
+$('.selector').jQueryTween({ to: { translate: { x: 150 } }, yoyo: true });
+$('.selector').jQueryTween({ to: { translate: { y: -150 } }, yoyo: true });
+$('.selector').jQueryTween({ to: { translate: { z: -150 } }, yoyo: true });
+$('.selector').jQueryTween({ to: { translate: { x: 150, y: -150, z: -300 } }, yoyo: true }); 
+</pre>
+
+		<h4>Tips for usage</h4>
+		<ol type="a">
+		  <li>If you only do a simple <code>translateZ</code> animation for instance, you will not see any effect taking place until you give the object or the object wrapper a <code>perspective: 400px;</code>. The more perspective value the deeper the depth of view, producing less effect.</li>
+		  <li>Sometimes when you perform a tween with translateZ and another property, they could compete and produce little to no effect. That is because the perspective.</li>
+		  <li>All translate properties accept values such as 150, "150px" and "150%", will always use the measurement unit of the target values, but the initial values are 0 by default and you may need to provide <code>{ from: { translate: {x: 50, y: 20} } }</code> value if you have set the object styling this way. Why? The script cannot read the browser computed <code>matrix3d()</code> values, it's a matter of performance and honestly not worth the effort.</li>
+		  <li><kbd>Notice</kbd> | unlike tweening width/height, transform does not allow tweening different properties with multiple tween instances at the same time. Only used all together in the same instance.</li>
+		</ol>
+	  </section>	  
+
+
+      <section id="rotate-tween">
+        <h2>Tweening Rotation Example</h2>  
+	  
+		<div class="media" style="perspective: 400px; overflow: visible;">
+		  <div id="rotate-example" class="example-object pull-left"> </div>
+		  <div class="media-body">
+			  <p>We take <code>rotate</code> transformation into another example as it's a bit different. In this example, the object is going to rotate on all axis separate and all together. Please know that for this example we have used a 400px perspective for the animated object container.</p>
+			  <p>
+				  <a class="btn btn-jtween btn-lg btn-rox" role="button">Rotate X</a>
+				  <a class="btn btn-jtween btn-lg btn-roy" role="button">Rotate Y</a>
+				  <a class="btn btn-jtween btn-lg btn-roz" role="button">Rotate Z</a>
+				  <a class="btn btn-jtween btn-lg btn-rotate" role="button">Rotate 3D</a>
+			  </p>      
+		  </div>
+		</div>	
+<pre>
+$('.selector').jQueryTween({ to: { rotate: { x: 180 } }, yoyo: true });
+$('.selector').jQueryTween({ to: { rotate: { y: -180 } }, yoyo: true });
+$('.selector').jQueryTween({ to: { rotate: { x: 90, y: -180, z: -360 } }, yoyo: true }); 
+</pre>
+
+		<h4>Tips for usage</h4>
+		<ol type="a">
+		  <li>Same as for translation, rotation also requires a perspective. If the <code>perspective</code> is not set anywhere, the rotation would not produce a 3D effect.</li>
+		  <li>Also same as for <code>translate</code>, rotation requires initial values if they were set by user via CSS, else default value 0 will be used.</li>
+		  <li>Unlike <code>translate</code>, <code>rotate</code> always performs with degrees. So it accepts values like "180" or "180deg" only.</li>
+		</ol>
+	  </section>	  
+	  
+      <section id="scale-tween">
+        <h2>Tweening Scaling Example</h2>  
+	  
+		<div class="media" style="overflow: visible;">
+		  <div id="scale-example" class="example-object pull-left"> </div>
+		  <div class="media-body">
+			  <p>We didn't say much about <code>opacity</code> so far, that is good, because combined with <code>scale</code> transformation makes a perfect animation, my favorite. I found no use to use <code>scaleX</code> or <code>scale3D</code> so far, simple scale is best.</p>
+			  <p>
+				  <a class="btn btn-jtween btn-lg btn-sc1" role="button">Scale Out</a>
+				  <a class="btn btn-jtween btn-lg btn-sc2" role="button">Scale In</a>
+			  </p>      
+		  </div>
+		</div>	
+<pre>
+$('.selector').jQueryTween({ to: { scale: 2 }, yoyo: true });
+$('.selector').jQueryTween({ from: {scale: 2}, to: { scale: 1 }, yoyo: true });
+</pre>
+
+		<h4>Tips for usage</h4>
+		<ol type="a">
+		  <li><code>scale</code> is also a <code>transform</code> property, but it does not require a perspective.</li>
+		  <li>Unlike <code>translate</code> or <code>rotate</code>, <code>scale</code> is always taken as absolute value. No unit required.</li>
+		</ol>
+	  </section>	  
+	  
+
+      <section id="background-tween">
+        <h2>Tweening Background Position Example</h2>  
+		
+		<div class="row">
+			<div class="col-md-4 col-sm-6">
+				<div class="jumbotron" style="overflow: hidden; width: 100%; height: 170px; ">
+				  <div id="background-example" class="parallax" style="background-size: 200% auto;"> </div>
+			 
+				</div>
+			</div>
+			<div class="col-md-8 col-sm-6">
+			  <p>In this example, the object is going to have background position transitions, one axis or both.</p>
+			  <p>This is technique very much used for parallax effects. Some scripts such as <a href="https://github.com/janpaepke/ScrollMagic">scrollMagic</a> even change background position in the same time with window scroll.</p>
+			  <p>
+				  <a class="btn btn-jtween btn-lg btn-bpx" role="button">Move X</a>
+				  <a class="btn btn-jtween btn-lg btn-bpy" role="button">Move Y</a>
+				  <a class="btn btn-jtween btn-lg btn-bpb" role="button">Move Both</a>
+			  </p> 
+			</div>
+		</div>
+		
+<pre>
+$('.selector').jQueryTween({ to: { backgroundPosition: { x: 'left' } }, yoyo: true });
+$('.selector').jQueryTween({ to: { backgroundPosition: { y: '100%' } }, yoyo: true });
+$('.selector').jQueryTween({ to: { backgroundPosition: { x: 90, y: 'center' } }, yoyo: true }); 
+</pre>
+
+		<h4>Tips for usage</h4>
+		<ol type="a">
+		  <li>This effect is not producing if the background image is not large enough or it's a case of <code>background-size: cover</code>.</li>
+		  <li>jQueryTween only performs background position animation in percent values, but this can be easily changed if you want.</li>
+		  <li>As you could see in the examples, it accepts strings as values but transforms them into percent. Example: "top" becomes "0%", or "center" becomes "50%".</li>
+		  <li>Using large background images can cause severe performance drawbacks so use with caution.</li>
+		</ol>
+	  </section>
+
+      <section id="scroll-tween">
+        <h2>Tweening Window Scroll Example</h2>  
+		
+		<div class="row">
+			<div class="col-md-10 col-sm-8">
+			  <p>This very page uses this feature. Make sure you check the navigation in the right side of the page.</p>
+			  <p>You can check the code below for using <kbd>smooth</kbd> scroll on mouse wheel.</p>
+			  <p>Or click <a class="gotop" href="#">here</a> if you are not convinced.</p>
+			</div>
+			<div class="col-md-2 col-sm-4">
+				<i class="fa fa-arrow-circle-o-right large-icon"></i> <i class="fa fa-arrow-circle-o-right large-icon"></i> <i class="fa fa-arrow-circle-o-right large-icon"></i>
+			</div>
+		</div>
+		
+<pre>
+// a simple scroll to top
+$('.selector').jQueryTween({ to: { scroll: 0 } });
+
+//a simple way to scroll to some element
+$('.selector').jQueryTween({ to: { scroll: $(this).offset().top } });
+
+// you may want to have a smooth animation on mouse scroll, here's the code
+// remember, this feature can chew your browser if has the console enabled
+$(window).on('mousewheel DOMMouseScroll',function(e) {
+  e.preventDefault();							
+  var el = $(this);
+  var scrollAmount = 250, currentScroll = $(el).scrollTop();
+  var delta = e.originalEvent.wheelDelta/120 || -e.originalEvent.detail/3;
+  var finalScroll = currentScroll - parseInt(delta*scrollAmount);
+
+  $('body').jQueryTween( { to : { scroll: finalScroll }, easing: 'TWEEN.Easing.Exponential.Out', duration : 500 } );
+});
+</pre>
+
+		<h4>Tips for usage</h4>
+		<ol type="a">
+		  <li>You don't want to use <code>yoyo</code> for this kind of stuff :D.</li>
+		  <li>You may wanna check the <code>scripts.js</code> I used for these demos, the scrolling can get quite fun.</li>
+		</ol>
+	  </section>
+
+      <section id="easing">
+        <h2>Easing Functions</h2>  
+		
+		  <p>The <a href="https://github.com/sole/tweenjs">tween.js</a> distribution comes with all the easing functions that we need to perform most of the animation needs. There are 31 functions so far, here is a <a href="http://sole.github.io/tween.js/examples/03_graphs.html">complete list</a>.</p>
+		  <p>The demo below will repeat 5 times, just mouse click inside the table and animations will go wild.</p>
+
+			
+		<table class="table" style="width: 100%">
+		  <thead><tr><th class="text-left">Function</th><th class="text-right">Demo</th></tr></thead>
+		  <tbody>
+			<tr><td><code>TWEEN.Easing.Linear.None</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quadratic.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quadratic.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quadratic.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Cubic.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Cubic.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Cubic.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quartic.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quartic.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quartic.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+		  </tbody>
+		</table>				
+			
+		<table class="table" style="width: 100%">
+		  <thead><tr><th class="text-left">Function</th><th class="text-right">Demo</th></tr></thead>
+		  <tbody>
+			<tr><td><code>TWEEN.Easing.Quintic.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quintic.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Quintic.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Sinusoidal.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Sinusoidal.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Sinusoidal.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Exponential.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Exponential.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Exponential.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			</tbody>
+		</table>				
+			
+		<table class="table" style="width: 100%">
+		  <thead><tr><th class="text-left">Function</th><th class="text-right">Demo</th></tr></thead>
+		  <tbody>
+			<tr><td><code>TWEEN.Easing.Circular.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Circular.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Circular.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Elastic.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Elastic.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Elastic.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Back.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Back.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Back.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Bounce.In</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Bounce.Out</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+			<tr><td><code>TWEEN.Easing.Bounce.InOut</code></td><td class="text-right"><i class="fa fa-cog large-icon"></td></tr>
+		  </tbody>
+		</table>			
+
+	  </section>
+
+      <section id="callbacks">
+        <h2>Callbacks</h2>  
+		
+		  <p>jQueryTween comes with a useful feature for callbacks. You can set a custom function after the animation is finished and even a function to execute while the tween is running. This explains what happens to the buttons on the dimension tweening <a href="#size-tween">example</a>.</p>
+		  <p>In the example, there are some custom functions triggered at custom events, let's explore the code a little bit.</p>
+		  <p>OK. Let's take it from the start shall we? Here's the basic syntax for jQueryTween.</p>
+<pre>
+$('.selector').jQueryTween(options,callback,special);
+</pre>		  
+		  <p>Now, back to our example, looks like this.</p>
+<pre>
+//so when we click the button
+$('.btn-width').on('click',function() {
+  
+  //first we cache the button object
+  var bt = $(this);
+  
+  //next, for all buttons we change classes and disable them, we don't want to interrupt the animation
+  $('.btn-width, .btn-height, .btn-width-height').removeClass('btn-jtween').addClass('btn-info disabled');
+
+  //then we initialize our tween animation
+  $('#size-example').jQueryTween({
+	
+	//these are the tween options
+	to: { width: 150 }, duration: 1000, yoyo: true },
+  
+	//here we trigger the callback function when animation is finished
+	function() {
+	  
+	  //the button gets a new text
+	  $(bt).text('Play width again' );
+	  
+	  //all buttons are enabled and get their initial class
+	  $('.btn-width, .btn-height, .btn-width-height').removeClass('btn-info disabled').addClass('btn-jtween');
+	},
+	
+	// while animation was running, for each frame we were calling the special callback
+	// this updates the button text with the current width
+	function() {
+	  $(bt).text('Width: ' + $('#size-example').width() + 'px' );	
+	});	
+});
+</pre>
+
+		<p>If you only want to add a function while tween is running, you can do something like this:</p>
+<pre>
+$('.selector').jQueryTween( {to: { opacity: 0 } }, null, function() {
+  //code for special callback goes here
+  ....
+}
+</pre>		
+		<p>Notice we have declared the callback on finish as <code>null</code> so that we can only affect what happens while tweening.
+	  </section>
+
+      <section id="issues">
+        <h2>Known Issues<small> Well not really issues</small></h2>  
+		<div class="list-group">
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Tween to relative values (such as "+200" or "-150") does not work properly with some properties.</h4>
+			<p class="list-group-item-text">Transform properties are known to cause problems when it comes to relative values transformations.</p>
+		  </a>
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Tween transform translateZ in percent values is not supported in all browsers.</h4>
+			<p class="list-group-item-text">Not enough data.</p>
+		  </a>
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Tweening background position only works for percent values.</h4>
+			<p class="list-group-item-text">This is actually not bad at all, you can hack the code to work with pixels as well, just I don't recommend it.</p>
+		  </a>
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Tween chaining is not implemented.</h4>
+			<p class="list-group-item-text">To make such a feature would require a complete rewrite of the jQueryPlugin to also incorporate the tween.js script. You find it a good idea and you know how, let me know.</p>
+		  </a>
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Tween stop/play/pause is not implemented.</h4>
+			<p class="list-group-item-text">Same as the above.</p>
+		  </a>
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Does not tween text properties, spacing, colors, etc, only what's shown in the examples.</h4>
+			<p class="list-group-item-text">Let's face it, why would you want to use a tweening engine to increase font size of some paragraph? I mean it's possible but not worth implementing. Color and background color would be interesting.</p>
+		  </a>
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Scroll events only work for document.body so far, no other option implemented.</h4>
+			<p class="list-group-item-text">This also can be changed easily but not really worth the effort.</p>
+		  </a>
+		  <a href="#" class="list-group-item">
+			<h4 class="list-group-item-heading">Scrolling a page via mouse wheel input can break the <code>scrollTo</code> tweening.</h4>
+			<p class="list-group-item-text">A callback function can be implemented to disable the mouse wheel untill the scroll finishes.</p>
+		  </a>
+		</div>	
+      </section>
+	  
+      <section id="contribute">
+        <h2>Wanna Contribute?</h2>
+		<div class="row">
+			<div class="col-sm-4">
+				<h4>Error Reporting</h4>
+				<p>If you found <kbd>NEW</kbd> issues please use the <a href="https://github.com/thednp/jQueryTween/issues">issue tracker</a> and provide detailed steps to replicate and/or <a href="http://jsfiddle.net/">fiddle</a> code sample.</p>
+			</div>
+			<div class="col-sm-4">
+				<h4>Contribute with Ideas or Code</h4>
+				<p>Same as with error reporting, please fork jQueryTween and request a PR, any time you see fit, <a href="https://github.com/thednp/jQueryTween/issues">here</a>.</p>
+			</div>
+			<div class="col-sm-4">
+				<h4>Donations are Welcomed</h4>
+				<p>Please feel free to donate, here's a <a title="Please Donate" href="bitcoin:138F8t1gb5FYtTk6FqNbXCNBCkCx5JZon7" class="donate-link" data-toggle="popover" data-placement="auto"><span class="label label-primary"><i class="fa fa-bitcoin"></i> quick link</span></a>.</p>
+			</div>
+		</div> 
+	 
+	 </section>
+
+	  
+	</div> <!-- close the main content column -->
+	
+
+	 <!-- main navigation -->	
+     <div class="col-xs-12 col-sm-3" id="sidebar" role="navigation">
+          <nav id="side-navigation">
+			  <ul id="side-nav" class="nav nav-pills nav-stacked side-nav">
+				<li class="active"><a href="#header">Scroll Top</a></li>
+				<li><a href="#overview">Overview</a></li>
+				<li><a href="#features" >Features</a></li>
+				<li><a href="#installation" >Installation</a></li>
+				<li><a href="#size-tween">Tweening Object Size</a></li>
+				<li><a href="#translate-tween">Tweening Translation</a></li>
+				<li><a href="#rotate-tween">Tween Rotation</a></li>
+				<li><a href="#scale-tween">Tween Scale</a></li>
+				<li><a href="#background-tween">Tweening Background Position</a></li>
+				<li><a href="#scroll-tween" >Scrolling Window</a></li>
+				<li><a href="#easing">Easing Functions</a></li>
+				<li><a href="#callbacks">Using Callbacks</a></li>
+				<li><a href="#issues">Known Issues</a></li>
+				<li><a href="#contribute">Contribute</a></li>
+				<li></li>
+			  </ul>
+          </nav>
+
+        </div><!--/nav-->		
+		
+    </div> <!-- /row -->
+	
+	</div> <!-- /container -->
+
+	<div class="footer">
+      <div class="container">
+        <p class="text-muted">jQuery<strong>Tween</strong> is made with love by <a href="http://themeforest.net/user/dnp_theme?ref=dnp_theme">dnp_theme</a>.</p>
+      </div>
+    </div>	
+	
+	
+</div> <!-- /wrapper -->
+
+
+</body>
 </html>
