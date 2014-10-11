@@ -11,7 +11,8 @@ Why jQueryTween?
 
 DEMO
 ======
-Coming soon.
+<a href="http://thednp.github.io/jQueryTween/"><img src="http://thednp.github.io/jQueryTween/assets/img/jQueryTween.png" alt="jQueryTween"></a>
+
 
 Get to know some features
 ======
