@@ -5,14 +5,13 @@ Lightest Tweening Engine for jQuery
 Why jQueryTween?
 ======
 * A simple plugin to easily bridge tween.js with jQuery, and for jQuery users, makes work alot easier. Imagine writing init(), animate() and update() over and over again?
-* It's about 6k minified plus 6k counting for <a href="https://github.com/sole/tween.js">tween.js</a>, you can do a ton of cool things without the need to use expensive or complicated animation engines, or as we know tweening engines.
+* It's about 2k minified and plus 6k of tween.js, you can do a ton of cool things without the need to use expensive or complicated animation engines.
 * This one is simple, light and I dare to say it's much more performance driven when it comes to simple tweens. 
-* Keep in mind that tween.js is not included into the jQueryTween plugin except the jQueryTween-aio-min.js distribution package. You will have to download at source if you wish to use it different.
+* Keep in mind that tween.js is not included into the jQueryTween plugin. You will have to download at source.
 
 DEMO
 ======
-<div><a target="_blank" href="http://thednp.github.io/jQueryTween/"><img src="http://thednp.github.io/jQueryTween/assets/img/jQueryTween.png" alt="jQueryTween"></a></div>
-
+Coming soon.
 
 Get to know some features
 ======
