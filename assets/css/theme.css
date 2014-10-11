@@ -21,7 +21,8 @@ h1 { letter-spacing: -3px; } h2 { letter-spacing: -2px; } h3 { letter-spacing: -
 }
 
 .test-col { perspective: 1200px; position: relative; }
-.jumbotron { position: relative }
+.jumbotron { position: relative; overflow: hidden; }
+.jumbotron .container { overflow: hidden; }
 
 .img-wrapper {
 	position: absolute; z-index: -1;
@@ -71,9 +72,7 @@ fieldset[disabled] .btn-donate,
 	background-color: #F5F5F5;
 }
 
-.footer p {
-	margin: 1.5em 0
-}
+.footer p {margin: 1.5em 0}
 .footer ul {margin: 10px 0}
 
 
