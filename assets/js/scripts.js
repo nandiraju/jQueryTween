@@ -217,11 +217,18 @@
 		// window scrolling
 		$('a[href^="#"]:not([href="#"])').on('click',function(e) {
 			e.preventDefault();	
-			var target = $( $.attr(this, 'href') );
+			var target = $( $.attr(this, 'href') ),d;
 			if ( target.length > 0) {
 				var targetPosition = $(target).offset().top;
-				var dynamicDuration = Math.abs(parseInt($(window).scrollTop() - $(target).offset().top));
-				$(this).jQueryTween( { to : { scroll: $(target).offset().top }, easing: 'TWEEN.Easing.Cubic.Out', duration : dynamicDuration } );
+				var scrollD = Math.abs(parseInt($(window).scrollTop()) - parseInt($(target).offset().top) );
+				if ( scrollD < 500 ) {
+					d = 500;
+				} else if ( scrollD > 500 && scrollD < 1000 ) {
+					d = 1000;
+				} else { d = 1500; }
+				
+				$(this).jQueryTween( { to : { scroll: $(target).offset().top }, easing: 'TWEEN.Easing.Cubic.Out', duration : d } );
+				console.log(d);
 			}
 		});
 		//smooth scroll
@@ -242,7 +249,7 @@
 				var tr = $(this);
 				var es = $(this).find('code').text();
 				var el = $(tr).find('i.fa');
-				$(el).jQueryTween({ to: { translate: { x: -500 }, rotate: { z: -360 } }, yoyo: true, easing: es, duration: 1500, repeat: 5 });
+				$(el).jQueryTween({ to: { translate: { x: -400 }, rotate: { z: -360 } }, yoyo: true, easing: es, duration: 1500, repeat: 5 });
 				
 			});
 		});
@@ -287,9 +294,7 @@
 			placement: 'auto top',
 			container: 'body',
 			template: '<div class="popover donate-popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content donate-content"></div></div>'
-		}).on('click', function(e) {
-			e.preventDefault();
-
+		}).on('click', function() {
 			var btn = $(this), address = btn.attr('href').replace("bitcoin:", "");
 			
 			if ( $('.donate-content > img').length == 0 ) {
@@ -306,7 +311,8 @@
 			}
 		});
 		
-		$('.donate-link').on('click',function() {
+		$('.donate-link').on('click',function(e) {
+			e.preventDefault();
 			var address = $(this).attr('href').replace("bitcoin:", "");
 			setTimeout(function() {
 				copyToClipboard( address );
