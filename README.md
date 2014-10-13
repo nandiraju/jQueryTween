@@ -5,7 +5,7 @@ Lightest Tweening Engine for jQuery
 Why jQueryTween?
 ======
 * A simple plugin to easily bridge tween.js with jQuery, and for jQuery users, makes work alot easier. Imagine writing init(), animate() and update() over and over again?
-* It's about 2k minified and plus 6k of tween.js, you can do a ton of cool things without the need to use expensive or complicated animation engines.
+* It's about 8k minified and plus 6k of tween.js, you can do a ton of cool things without the need to use expensive or complicated animation engines.
 * This one is simple, light and I dare to say it's much more performance driven when it comes to simple tweens. 
 * Keep in mind that tween.js is not included into the jQueryTween plugin. You will have to download at source.
 
@@ -22,6 +22,8 @@ Get to know some features
 * performance tweaks, when only a few tween properties are used, the others don't update
 * for most properties you don't need to set an initial value, it gets it's current properties values, except transform 
 * tween scrollTo events
+* tween text color and background-color
+* tween positions: top, bottom, left, right (for absolute position objects)
 * tween background position, but only when using percent values for X and Y
 * tween transform translate2d or translate3d
 * tween transform rotate2d or rotate3d
@@ -40,7 +42,7 @@ you don't want all your things to fly around.
  
 Advanced Example
 ======
-<pre> // Complex example jQueryTween syntax, with all supported features 
+<pre> // Complex example jQueryTween syntax 
 $('#selector').jQueryTween({
 	from: {
 		opacity: 1,
@@ -85,10 +87,9 @@ $('a#button').on('click', function(e) {
 TO DO / known issues
 ======
 * tween to relative values (such as "+200" or "-150") does not work properly with some properties
-* tween transform translate only supports pixels as unit
 * tweening background position only works for percent values
 * tween chaining is not implemented
-* tween play/pause is not implemented
+* tween stop/play/pause is not implemented
 * does not tween text properties, spacing, etc, only what's shown in the examples
 * scroll events are only available for document.body, no other containers available
 
