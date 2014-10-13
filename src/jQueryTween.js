@@ -8,13 +8,14 @@
 ;(function($) {
 
 	"use strict";	
-	// init jQueryTween main object
-	var jQueryTween = function( item, options, callback, special ) {
+	// define JQueryTween main object
+	var JQueryTween = function( item, options, callback, special ) {
 			
 		//get some variables
 		var sct = gSC(window);	
 		var el = $(item)[0];
-	
+		var rpv = '';
+		var css = getComputedStyle(el, null);
 		
 		// these are the default start values for all tweens if not specified by user call
 		var ops = $.extend(true,{
@@ -22,7 +23,9 @@
 				opacity		: 1, // integer
 				width		: '', // integer/px/%
 				height		: '', // integer/px/%
-				position	: {top:'',right:'',bottom:'',left:''},
+				color		: '', //hex/rgb
+				backgroundColor : '', //hex/rgb				
+				position	: {top:'',right:'',bottom:'',left:''}, // integer/%
 				backgroundPosition: {x:'',y:''}, // integer/%/string[left,center,bottom,etc]
 				translate	: {x:0, y:0, z:0}, // integer only
 				rotate		: {x:0, y:0, z:0}, // integer only
@@ -33,6 +36,8 @@
 				opacity		: '',
 				width		: '', 
 				height		: '',
+				color		: '',
+				backgroundColor : '',
 				position	: {top:'',right:'',bottom:'',left:''},
 				backgroundPosition: {x: '', y: ''},			
 				translate	: {x:'', y:'', z:''},
@@ -40,147 +45,226 @@
 				scale		: '',
 				scroll		: '',			
 			},
-			easing			: 'TWEEN.Easing.Linear.None', // we need to wrap in quotes the Easing function as jQuery does not recognize it as defined variable
+			easing			: TWEEN.Easing.Linear.None, // we need to wrap in quotes the Easing function as jQuery does not recognize it as defined variable
 			delay			: 0,
 			duration		: 500,			
 			repeat			: 0,	// 0 / n / 'Infinity'		
 			yoyo			: false,				
 		}, options );
 		
+		//redefine supported properties
+		var ofo = ops.from.opacity;
+		var ofw = ops.from.width;
+		var ofh = ops.from.height;
+		var ofc = ops.from.color;
+		var ofbc = ops.from.backgroundColor;
+		var oft = ops.from.position.top;
+		var ofr = ops.from.position.right;
+		var ofb = ops.from.position.bottom;
+		var ofl = ops.from.position.left;
+		var ofbx = ops.from.backgroundPosition.x;
+		var ofby = ops.from.backgroundPosition.y;
+		var oftx = ops.from.translate.x;
+		var ofty = ops.from.translate.y;
+		var oftz = ops.from.translate.z;
+		var ofrx = ops.from.rotate.x;
+		var ofry = ops.from.rotate.y;
+		var ofrz = ops.from.rotate.z;
+		var ofs = ops.from.scale;
+		var ofsc = ops.from.scroll;
+
+		var oto = ops.to.opacity;
+		var otw = ops.to.width;
+		var oth = ops.to.height;
+		var otc = ops.to.color;
+		var otbc = ops.to.backgroundColor;
+		var ott = ops.to.position.top;
+		var otr = ops.to.position.right;
+		var otb = ops.to.position.bottom;
+		var otl = ops.to.position.left;
+		var otbx = ops.to.backgroundPosition.x;
+		var otby = ops.to.backgroundPosition.y;
+		var ottx = ops.to.translate.x;
+		var otty = ops.to.translate.y;
+		var ottz = ops.to.translate.z;
+		var otrx = ops.to.rotate.x;
+		var otry = ops.to.rotate.y;
+		var otrz = ops.to.rotate.z;
+		var ots = ops.to.scale;
+		var otsc = ops.to.scroll;		
+		
 		//properly process repeat and handle yoyo
 		if ( ops.repeat === 0 && ops.yoyo === true ) {
-			var repeatValue = 1;
+			rpv = 1;
 		} else {
 			if ( !$.isNumeric(ops.repeat) && ops.repeat !== 'Infinity' ) { // if misstyped
-				var repeatValue = 0;
+				rpv = 0;
 			} else {
-				var repeatValue = eval(ops.repeat);			
+				rpv = eval(ops.repeat);			
 			}
-		}		
-		
-		//from/initial values
-		var iwi	= cv(ops.from.width) ? truD(ops.from.width)[0] : truD( $(item).width())[0];
-		var ihe	= cv(ops.from.height) ? truD(ops.from.height)[0] : truD($(item).height())[0];
-		
-		var ito = cv(ops.from.position.top) ? truD(ops.from.position.top)[0] : '';
-		var iri	= cv(ops.from.position.right) ? truD(ops.from.position.right)[0] : '';
-		var ibo	= cv(ops.from.position.bottom) ? truD(ops.from.position.bottom)[0] : '';
-		var ile	= cv(ops.from.position.left) ? truD(ops.from.position.left)[0] : '';
-		
-		if ( cv( ops.to.backgroundPosition.x ) || cv( ops.to.backgroundPosition.y ) ) {
-			var ibx	= cv( ops.from.backgroundPosition.x ) ? truX(ops.from.backgroundPosition.x) : bPos(item)[0];
-			var iby	= cv( ops.from.backgroundPosition.y ) ? truY(ops.from.backgroundPosition.y) : bPos(item)[1];
-		} else {
-			var ibx	= '';
-			var iby	= '';		
 		}
 		
-		var itx	= cv(ops.from.translate.x) ? truD(ops.from.translate.x)[0] :'';
-		var ity	= cv(ops.from.translate.y) ? truD(ops.from.translate.y)[0] :'';
-		var itz	= cv(ops.from.translate.z) ? truD(ops.from.translate.z)[0] :'';
+		//fix the scrolling being interrupted via mousewheel		
+		if ( cv(otsc) ) { $('body').addClass('scrolling'); }
 		
-		var irx = cv(ops.from.rotate.x) ? truD(ops.from.rotate.x)[0] :''; //always deg
-		var iry = cv(ops.from.rotate.y) ? truD(ops.from.rotate.y)[0] :'';
-		var irz = cv(ops.from.rotate.z) ? truD(ops.from.rotate.z)[0] :'';
+		//from/initial values
+		var icor = cv(ofc) ? parseInt(pc(ofc)[0]) : parseInt(css.color.match(/\d+/g)[0]);
+		var icog = cv(ofc) ? parseInt(pc(ofc)[1]) : parseInt(css.color.match(/\d+/g)[1]);
+		var icob = cv(ofc) ? parseInt(pc(ofc)[2]) : parseInt(css.color.match(/\d+/g)[2]);
 		
-		var isa = ops.from.scale; // always int
-		var iop = ops.from.opacity;
-		var isc = ops.from.scroll;
+		var ibcr = cv(ofbc) ? parseInt(pc(ofbc)[0]) : parseInt(css.backgroundColor.match(/\d+/g)[0]);
+		var ibcg = cv(ofbc) ? parseInt(pc(ofbc)[1]) : parseInt(css.backgroundColor.match(/\d+/g)[1]);
+		var ibcb = cv(ofbc) ? parseInt(pc(ofbc)[2]) : parseInt(css.backgroundColor.match(/\d+/g)[2]);
+		
+		var iwi	= cv(ofw) ? truD(ofw)[0] : truD( css.width )[0];
+		var ihe	= cv(ofh) ? truD(ofh)[0] : truD( css.width )[0];
+		
+		var ito = cv(oft) ? truD(oft)[0] : '';
+		var iri	= cv(ofr) ? truD(ofr)[0] : '';
+		var ibo	= cv(ofb) ? truD(ofb)[0] : '';
+		var ile	= cv(ofl) ? truD(ofl)[0] : '';
+		
+		var ibx, iby, bx, by;
+		if ( cv( otbx ) || cv( otby ) ) {
+			ibx	= cv( ofbx ) ? truX(ofbx) : bPos(el)[0];
+			iby	= cv( ofby ) ? truY(ofby) : bPos(el)[1];
+		} else {
+			ibx	= '';
+			iby	= '';		
+		}
+		
+		var tr3d,tx,ty,tz,itx,ity,itz;
+		if ( cv( ottx ) || cv( otty ) || cv( ottz ) ) {
+			itx	= cv(oftx) ? truD(oftx)[0] : 0;
+			ity	= cv(ofty) ? truD(ofty)[0] : 0;
+			itz	= cv(oftz) ? truD(oftz)[0] : 0;
+		} else {
+			itx = ''; ity = ''; itz = '';
+		}	
+		
+		var irx = cv(ofrx) ? truD(ofrx)[0] :''; //always deg
+		var iry = cv(ofry) ? truD(ofry)[0] :'';
+		var irz = cv(ofrz) ? truD(ofrz)[0] :'';
+		
+		var isa = ofs; // always int
+		var iop = ofo;
+		var isc = ofsc;
 		
 				
 		//target values
-		var wi	= cv( ops.to.width ) ? truD(ops.to.width)[0] : '';
-		var he	= cv( ops.to.height ) ? truD(ops.to.height)[0] : '';
-				
-		var top	= cv(ops.to.position.top) ? truD(ops.to.position.top)[0] : '';
-		var ri	= cv(ops.to.position.right) ? truD(ops.to.position.right)[0] : '';
-		var bo	= cv(ops.to.position.bottom) ? truD(ops.to.position.bottom)[0] : '';
-		var le	= cv(ops.to.position.left) ? truD(ops.to.position.left)[0] : '';
+		var cor = cv(otc) ? parseInt(pc(otc)[0]) : '';
+		var cog = cv(otc) ? parseInt(pc(otc)[1]) : '';
+		var cob = cv(otc) ? parseInt(pc(otc)[2]) : '';
 		
-		if ( cv( ops.to.backgroundPosition.x ) || cv( ops.to.backgroundPosition.y ) ) {
-			var bx	= cv( ops.to.backgroundPosition.x ) ? truX(ops.to.backgroundPosition.x) : ibx;
-			var by	= cv( ops.to.backgroundPosition.y ) ? truY(ops.to.backgroundPosition.y) : iby;
+		var bcr = cv(otbc) ? parseInt(pc(otbc)[0]) : '';
+		var bcg = cv(otbc) ? parseInt(pc(otbc)[1]) : '';
+		var bcb = cv(otbc) ? parseInt(pc(otbc)[2]) : '';
+		
+		var wi	= cv( otw ) ? truD(otw)[0] : '';
+		var he	= cv( oth ) ? truD(oth)[0] : '';
+				
+		var top	= cv(ott) ? truD(ott)[0] : '';
+		var ri	= cv(otr) ? truD(otr)[0] : '';
+		var bo	= cv(otb) ? truD(otb)[0] : '';
+		var le	= cv(otl) ? truD(otl)[0] : '';
+		
+		if ( cv( otbx ) || cv( otby ) ) {
+			bx	= cv( otbx ) ? truX(otbx) : ibx;
+			by	= cv( otby ) ? truY(otby) : iby;
 		} else {
-			var bx	= '';
-			var by	= '';		
+			bx	= '';
+			by	= '';		
 		}
 		
-		var tx	= cv( ops.to.translate.x ) ? truD(ops.to.translate.x)[0] : '';
-		var ty	= cv( ops.to.translate.y ) ? truD(ops.to.translate.y)[0] : '';
-		var tz	= cv( ops.to.translate.z ) ? truD(ops.to.translate.z)[0] : '';
+		if ( cv( ottx ) || cv( otty ) || cv( ottz ) ) {
+			tx	= cv( ottx ) ? truD(ottx)[0] : 0;
+			ty	= cv( otty ) ? truD(otty)[0] : 0;
+			tz	= cv( ottz ) ? truD(ottz)[0] : 0;		
+		} else {
+			tx = ''; ty = ''; tz = '';
+		}
 		
-		var rx = cv( ops.to.rotate.x ) ? ops.to.rotate.x : '';
-		var ry = cv( ops.to.rotate.y ) ? ops.to.rotate.y : '';
-		var rz = cv( ops.to.rotate.z ) ? ops.to.rotate.z : '';
+		var rx = cv( otrx ) ? otrx : '';
+		var ry = cv( otry ) ? otry : '';
+		var rz = cv( otrz ) ? otrz : '';
 		
-		var sa 	= cv( ops.to.scale ) ?  ops.to.scale : '';
-		var op 	= cv( ops.to.opacity ) ? ops.to.opacity : '';
-		var sc 	= cv( ops.to.scroll ) ? ops.to.scroll : '';
+		var sa 	= cv( ots ) ?  ots : '';
+		var op 	= cv( oto ) ? oto : '';
+		var sc 	= cv( otsc ) ? otsc : '';
 
 		//check unit
-		var wiu	= cv( wi ) ? truD(ops.to.width)[1] : '';
-		var heu	= cv( he ) ? truD(ops.to.height)[1] : '';
+		var wiu	= cv( wi ) ? truD(otw)[1] : '';
+		var heu	= cv( he ) ? truD(oth)[1] : '';
 		
-		var tou	= cv( top ) ? truD(ops.to.top)[1] : '';
-		var riu	= cv( top ) ? truD(ops.to.right)[1] : '';
-		var bou	= cv( top ) ? truD(ops.to.bottom)[1] : '';
-		var leu	= cv( top ) ? truD(ops.to.left)[1] : '';
+		var tou	= cv( ott ) ? truD(ott)[1] : '';
+		var riu	= cv( otr ) ? truD(otr)[1] : '';
+		var bou	= cv( otb ) ? truD(otb)[1] : '';
+		var leu	= cv( otl ) ? truD(otl)[1] : '';
 		
-		var txu	= cv( tx ) ? truD(ops.to.translate.x)[1] : '';
-		var tyu	= cv( ty ) ? truD(ops.to.translate.y)[1] : '';
-		var tzu	= cv( tz ) ? truD(ops.to.translate.z)[1] : '';					
+		var txu	= cv( tx ) ? truD(ottx)[1] : '';
+		var tyu	= cv( ty ) ? truD(otty)[1] : '';
+		var tzu	= cv( tz ) ? truD(ottz)[1] : '';					
 						
 		// init tween.js
 		animateTween();
 		
-		var from = { w: iwi, h: ihe, t: ito, right: iri, b: ibo, l: ile, bgX: ibx, bgY: iby, scale: isa, trX: itx, trY: ity, trZ: itz, roX: irx, roY: iry, roZ: irz, opacity: iop, scroll: isc };
-		var target = { w: wi, h: he, t: top, right: ri, b: bo, l: le, bgX: bx, bgY: by, scale: sa, trX: tx, trY: ty, trZ: tz, roX: rx, roY: ry, roZ: rz, opacity: op, scroll: sc };
+		var from = { w: iwi, h: ihe, t: ito, r: iri, b: ibo, l: ile, colr: icor, colg: icog, colb: icob, bgr: ibcr, bgg: ibcg, bgb: ibcb, bgX: ibx, bgY: iby, scale: isa, trX: itx, trY: ity, trZ: itz, roX: irx, roY: iry, roZ: irz, opacity: iop, scroll: isc };
+		var target = { w: wi, h: he, t: top, r: ri, b: bo, l: le, colr: cor, colg: cog, colb: cob, bgr: bcr, bgg: bcg, bgb: bcb, bgX: bx, bgY: by, scale: sa, trX: tx, trY: ty, trZ: tz, roX: rx, roY: ry, roZ: rz, opacity: op, scroll: sc };
 		
 		var tween = new TWEEN.Tween( from )				
 			.to( target, ops.duration )
 			.delay( ops.delay )
-			.easing( eval(ops.easing) )
+			.easing( ops.easing )
 			.yoyo( ops.yoyo )
-			.repeat( repeatValue )
+			.repeat( rpv )
 			.onUpdate(
-				function () {					
+				function () {
+				
 					//set tween values
-					var trxt	= cv(tx) ? ' translateX(' + this.trX + txu + ')' : '';
-					var tryt	= cv(ty) ? ' translateY(' + this.trY + tyu + ')' : '';
-					var trzt	= cv(tz) ? ' translateZ(' + this.trZ + tzu + ')' : '';
 					
+					//color and background-color					
+					if ( cv(cor) ) { el.style.color = rth( parseInt(this.colr),parseInt(this.colg),parseInt(this.colb) ); }
+					if ( cv(bcr) ) { el.style.backgroundColor = rth( parseInt(this.bgr),parseInt(this.bgg),parseInt(this.bgb)); }
+
+					//translate3d
+					if ( cv(tx) || cv(ty) || cv(tz) ) {
+						tr3d = 'translate3d(' + ((this.trX + txu) || 0) + ',' + ((this.trY + tyu) || 0) + ',' + ((this.trZ + tzu) || 0) + ')';
+					} else { tr3d = ''; }
+
 					var roxt = cv(rx) ? ' rotateX(' + this.roX + 'deg)' : '';
 					var royt = cv(ry) ? ' rotateY(' + this.roY + 'deg)' : '';
 					var rozt = cv(rz) ? ' rotateZ(' + this.roZ + 'deg)' : '';
-					
+
+					//scale
 					var sca = cv(sa) ? ' scale(' + this.scale + ')' : '';
-					
-					var transform = sca + trxt + tryt + trzt + roxt + royt + rozt;
+
+					//sum all transform
+					var transform = sca + tr3d + roxt + royt + rozt;
 					if ( cv(transform) ) { tr(transform); }
-					
+
 					//dimensions
-					if ( cv(wi) ) { el.style.width = this.w + wiu; }					
+					if ( cv(wi) ) { el.style.width = this.w + wiu; }
 					if ( cv(he) ) { el.style.height = this.h + heu; }
-					
+
 					//positioning
 					if ( cv(top) ) { el.style.top = this.t + tou; }					
 					if ( cv(ri ) ) { el.style.right = this.r + riu; }
 					if ( cv(bo ) ) { el.style.bottom = this.b + bou; }
 					if ( cv(le ) ) { el.style.left = this.l + leu; }
-					
+
 					// scrolling
 					if ( cv(sc) ) { sct[0].scrollTop = this.scroll; }
-					
+
 					//background position
 					if ( cv(bx) || cv(by) ) {
 						var bXX = this.bgX;
 						var bYY = this.bgY;
 						el.style.backgroundPosition = bXX.toString()+'% '+bYY.toString()+'%';
 					}
-		
+
 					//opacity					
 					if ( cv(op) ) { el.style.opacity = this.opacity; }
-					
+
 					//run special function onUpdate
 					if ( special && typeof special === "function") { special(); }					
 				}
@@ -198,23 +282,27 @@
 			if ( callback && typeof callback === "function") { 
 				callback();
 			}
+			if ( cv(otsc) ) {
+				$('body').removeClass('scrolling');
+			}
 		}
 		
 		/* Process values utils
 		*
 		*/
+		
 		//value checker
 		function cv(val) {
 			if ( val !== 'undefined' && val !== '' && val !== 'NaN' ) return true;
-		};
+		}
 		
 		//get true w/h
 		function truD(d){
 			var v,u;
 			if (/px/i.test(d)) { 
-				u = 'px'; v = parseInt( d.replace('px',d) );
+				u = 'px'; v = parseInt( d );
 			} else if (/%/i.test(d)) {
-				u = '%'; v = parseInt( d.replace('%',d) );
+				u = '%'; v = parseInt( d );
 			} else {
 				v = d; u = 'px';
 			}	
@@ -230,9 +318,9 @@
 			} else if ( x == 'right' ) { 
 				return 100; 		
 			} else { 
-				return parseInt( x.toString().replace('%', '')); 
+				return parseInt( x ); 
 			} 			
-		};
+		}
 		function truY(y) {
 			if ( y == 'top' ) { 
 				return 0; 
@@ -241,33 +329,58 @@
 			} else if ( y == 'bottom' ) { 
 				return 100; 		
 			} else { 
-				return parseInt( y.toString().replace('%', '')); 
+				return parseInt( y ); 
 			} 			
-		};
+		}
 		
 		//get current background position
 		function bPos(elem) {	
-			var style = $(elem).css('background-position'),x,y;			
-			var pos = style.split(" ");		
+			var sty = css.backgroundPosition,x,y;			
+			var pos = sty.split(" ");
 				x = truX(pos[0]);			
 			if ( cv(pos[1]) ) {
-				y = truY(pos[1])
+				y = truY(pos[1]);
 			} else {
 				y = 0;
 			}
 			return [ x, y ]; 
-		};
+		}
+		
+		// process color
+		function pc(c) {
+			if ( cv(c) && /#/i.test(c) ) { return [htr(c).r,htr(c).g,htr(c).b]; } else { return c.replace(/[^\d,]/g, '').split(','); }
+		}		
+		//transform rgb to hex or vice-versa
+		function rth(r, g, b) {
+			return "#" + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1);
+		}
+	
+		function htr(hex) {
+			//Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+			var shr = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+			hex = hex.replace(shr, function(m, r, g, b) {
+				return r + r + g + g + b + b;
+			});
+
+			var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+			return result ? {
+				r: parseInt(result[1], 16),
+				g: parseInt(result[2], 16),
+				b: parseInt(result[3], 16)
+			} : null;
+		}
 		
 		//process transform
-		function tr(prop) {	
-			el.style.webkitTransform = prop;
-			el.style.MozTransform = prop;
-			el.style.Transform = prop;			
+		function tr(p) {	
+			el.style.webkitTransform = p;
+			el.style.MozTransform = p;
+			el.style.msTransform = p;
+			el.style.Transform = p;			
 		}
 		
 		//get true container for scroll events
-		function gSC(container) {
-			return $(container).map(function() {
+		function gSC(c) {
+			return $(c).map(function() {
 				var cnt = this,
 					isWin = !cnt.nodeName || $.inArray( cnt.nodeName.toLowerCase(), ['iframe','#document','html','body'] ) != -1;
 					if (!isWin) return cnt;
@@ -278,14 +391,22 @@
 					doc.body :
 					doc.documentElement;
 			});
-		};
+		}
 	
-	};
+	}; // closing the main object
 	
+	//prevent mousewheel while scrolling
+	$(window).on('mousewheel DOMMouseScroll',function(e) {
+		if ( $('body').hasClass('scrolling') ) {
+			e.preventDefault();
+		}
+	});		
+	
+	//INIT ANIMATION
 	$.fn.jQueryTween = function( options, callback, special ) {
 		return this.each(function() {
-			new jQueryTween( this, options, callback, special );
+			new JQueryTween( this, options, callback, special );
 		});
-	};	
+	};
 	
 })(jQuery);
