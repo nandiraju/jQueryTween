@@ -9,7 +9,7 @@
 
 	"use strict";	
 	// define JQueryTween main object
-	var JQueryTween = function( item, options, callback, special ) {
+	var tweens = [], JQueryTween = function( item, options, callback, special ) {
 			
 		//get some variables
 		var sct = gSC(window);	
@@ -271,6 +271,7 @@
 			)
 			.onComplete( runCallback )
 			.start();
+			tweens.push(tween);
 		
 		function animateTween(time) {
 			requestAnimationFrame( animateTween );
@@ -408,5 +409,14 @@
 			new JQueryTween( this, options, callback, special );
 		});
 	};
+	
+	// PAUSE / PLAY
+	['play', 'pause', 'stopTween'].forEach(function(props){
+	$.fn.pause = function () {
+	for ( var i = 0; i < tweens.length; i++ ) {
+	tweens[i][prop]();
+	}
+	}
+	});
 	
 })(jQuery);
