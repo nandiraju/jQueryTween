@@ -4,12 +4,13 @@
  * https://github.com/thednp/jQueryTween
  * @author Dan Partac / http://themeforest.net/user/dnp_theme
  */
+
  
 ;(function($) {
 
 	"use strict";	
 	// define JQueryTween main object
-	var JQueryTween = function( item, options, callback, special ) {
+	var tweens = [], JQueryTween = function( item, options, callback, special ) {
 			
 		//get some variables
 		var sct = gSC(window);	
@@ -108,13 +109,13 @@
 		if ( cv(otsc) ) { $('body').addClass('scrolling'); }
 		
 		//from/initial values
-		var icor = cv(ofc) ? parseInt(pc(ofc)[0]) : parseInt(css.color.match(/\d+/g)[0]);
-		var icog = cv(ofc) ? parseInt(pc(ofc)[1]) : parseInt(css.color.match(/\d+/g)[1]);
-		var icob = cv(ofc) ? parseInt(pc(ofc)[2]) : parseInt(css.color.match(/\d+/g)[2]);
+		var icor = cv(ofc) ? parseInt(pc(ofc)[0]) : parseInt(truC(css.color).match(/\d+/g)[0]);
+		var icog = cv(ofc) ? parseInt(pc(ofc)[1]) : parseInt(truC(css.color).match(/\d+/g)[1]);
+		var icob = cv(ofc) ? parseInt(pc(ofc)[2]) : parseInt(truC(css.color).match(/\d+/g)[2]);
 		
-		var ibcr = cv(ofbc) ? parseInt(pc(ofbc)[0]) : parseInt(css.backgroundColor.match(/\d+/g)[0]);
-		var ibcg = cv(ofbc) ? parseInt(pc(ofbc)[1]) : parseInt(css.backgroundColor.match(/\d+/g)[1]);
-		var ibcb = cv(ofbc) ? parseInt(pc(ofbc)[2]) : parseInt(css.backgroundColor.match(/\d+/g)[2]);
+		var ibcr = cv(ofbc) ? parseInt(pc(ofbc)[0]) : parseInt(truC(css.backgroundColor).match(/\d+/g)[0]);
+		var ibcg = cv(ofbc) ? parseInt(pc(ofbc)[1]) : parseInt(truC(css.backgroundColor).match(/\d+/g)[1]);
+		var ibcb = cv(ofbc) ? parseInt(pc(ofbc)[2]) : parseInt(truC(css.backgroundColor).match(/\d+/g)[2]);
 		
 		var iwi	= cv(ofw) ? truD(ofw)[0] : truD( css.width )[0];
 		var ihe	= cv(ofh) ? truD(ofh)[0] : truD( css.width )[0];
@@ -271,6 +272,7 @@
 			)
 			.onComplete( runCallback )
 			.start();
+			tweens.push(tween);
 		
 		function animateTween(time) {
 			requestAnimationFrame( animateTween );
@@ -346,6 +348,15 @@
 			return [ x, y ]; 
 		}
 		
+		// convert transparent to rgba()
+		function truC(c) {
+			if ( c === 'transparent' ) { 
+				return c.replace('transparent','rgba(0,0,0,0)');
+			} else if ( cv(c) ) {
+				return c;
+			}		
+		}
+		
 		// process color
 		function pc(c) {
 			if ( cv(c) && /#/i.test(c) ) { return [htr(c).r,htr(c).g,htr(c).b]; } else { return c.replace(/[^\d,]/g, '').split(','); }
@@ -408,5 +419,14 @@
 			new JQueryTween( this, options, callback, special );
 		});
 	};
+	
+	// PAUSE / PLAY / STOP
+	['play', 'pause', 'stop'].forEach(function(prop){
+		$.fn[prop] = function () {
+			for ( var i = 0; i < tweens.length; i++ ) {
+				tweens[i][prop]();
+			}
+		}
+	});
 	
 })(jQuery);

@@ -13,13 +13,15 @@
 		$('.btn-play').on('click',function() {
 			var bt = $(this);
 			$(bt).removeClass('btn-success').addClass('btn-info disabled');
+			$('.btn-stop,.btn-play-pause').removeClass('hidden');
 			
 			if ( $(bt).hasClass('once') ) {
 				$('.jQueryTween').jQueryTween({ to: { opacity: 0 }, easing: TWEEN.Easing.Cubic.Out, duration : 1000 }, null, function() {
-					$(bt).text('Animating..' );					
+					$(bt).text('Animating..' );			
 				});				
 				$('.jQueryTween').jQueryTween({ from: { opacity: 0, translate: {x: -500, z: 150}, rotate: {x: 180, y: -90,  z: 3600} }, to: { opacity: 1, translate: {x: 0, z: 0}, rotate: {x:0, y:0, z: 0} }, easing: TWEEN.Easing.Cubic.Out, duration : 2500, delay: 1000 }, function() {				
 					$(bt).removeClass('btn-info disabled once').addClass('btn-success').text('Play Again');
+					$('.btn-stop,.btn-play-pause').addClass('hidden');
 				});
 			} else {
 				$('.jQueryTween').jQueryTween(  { to: { opacity: 0 }, easing: TWEEN.Easing.Cubic.Out, duration : 1000 }, null, function() {
@@ -31,11 +33,27 @@
 				$('.jQueryTween').jQueryTween({ from: { opacity: 0, translate: {z: 800}, rotate: {y:-360} }, to: { opacity: 1, translate: {z: 0}, rotate: {y:0}}, easing: TWEEN.Easing.Cubic.Out, duration : 300, delay: 1900 });				
 				$('.jQueryTween').jQueryTween({ from: { opacity: 0, scale: 4, translate: { x: -100, y: 100, z: -100}, rotate: {z:-3600} }, to: { opacity: 1, scale: 1, translate: { x: 0, y: 0, z:0}, rotate: {z:0}}, easing: TWEEN.Easing.Back.Out, duration : 1000, delay: 2200 }, function() {			
 					$(bt).removeClass('btn-info disabled').addClass('btn-success once').text('Play Again');
+					$('.btn-stop,.btn-play-pause').addClass('hidden');
 				});
 			}
 		});
 		$('.btn-stop').on('click',function() {
-			$('.jQueryTween').pauseTween();
+			$('.jQueryTween').stop();
+			$('.btn-play').removeClass('btn-info disabled').addClass('btn-success once').text('Play Again');
+			$('.btn-stop,.btn-play-pause').addClass('hidden');
+			$('.btn-play-pause').removeClass('btn-success').addClass('btn-warning');
+			$('.btn-play-pause').find('i.fa').removeClass('fa-play').addClass('fa-pause');
+		});
+		$('.btn-play-pause').on('click',function() {
+			if ( $(this).find('i').hasClass('fa-pause') ) {
+				$(this).removeClass('btn-warning').addClass('btn-success');
+				$(this).find('i.fa').removeClass('fa-pause').addClass('fa-play');
+				$('.jQueryTween').pause();
+			} else {
+				$(this).removeClass('btn-success').addClass('btn-warning');
+				$(this).find('i.fa').removeClass('fa-play').addClass('fa-pause');
+				$('.jQueryTween').play();				
+			}	
 		});
 
 		//colors
@@ -245,7 +263,7 @@
 			});
 		});
 		
-		//advanced example
+		//position example
 		$('.btn-pos').on('click',function() {
 			var bt = $(this);
 			$(bt).removeClass('btn-jtween').addClass('btn-info disabled');
@@ -255,12 +273,12 @@
 			$('#position-example').jQueryTween({ from: { position: {right: '-100%'} }, to: { position: { right: '45%'} }, easing: TWEEN.Easing.Cubic.Out, duration: 1000, delay: 2500 });
 			$('#position-example').jQueryTween({ from: { position: {right: '45%'} }, to: { position: { right: '-100%' } }, easing: TWEEN.Easing.Cubic.InOut, duration: 1000, delay: 4000 }, function() { $('#position-example').css({right: 'auto'}); });
 		
-			$('#position-example').jQueryTween({ from: { position: {top: '-100%'} }, to: { position: { top: '25%'} }, easing: TWEEN.Easing.Cubic.Out, duration: 1000, delay: 5000 });
-			$('#position-example').jQueryTween({ from: { position: {top: '25%'} }, to: { position: { top: '-100%' } }, easing: TWEEN.Easing.Cubic.InOut, duration: 1000, delay: 6500 }, function() { $('#position-example').css({top: 'auto'}); });
+			$('#position-example').jQueryTween({ from: { position: {top: '-100%'} }, to: { position: { top: '24.5%'} }, easing: TWEEN.Easing.Cubic.Out, duration: 1000, delay: 5000 });
+			$('#position-example').jQueryTween({ from: { position: {top: '24.5%'} }, to: { position: { top: '-100%' } }, easing: TWEEN.Easing.Cubic.InOut, duration: 1000, delay: 6500 }, function() { $('#position-example').css({top: 'auto'}); });
 
-			$('#position-example').jQueryTween({ from: { position: {bottom: '-100%'} }, to: { position: {bottom: '25%'} }, easing: TWEEN.Easing.Cubic.Out, duration: 1000, delay: 7500 });
-			$('#position-example').jQueryTween({ from: { position: {bottom: '25%'} }, to: { position: { bottom: '-100%' } }, easing: TWEEN.Easing.Cubic.InOut, duration: 1000, delay: 9000 }, function() { 
-				$('#position-example').css({bottom: 'auto', left: '-100%'}); 
+			$('#position-example').jQueryTween({ from: { position: {bottom: '-100%'} }, to: { position: {bottom: '24.5%'} }, easing: TWEEN.Easing.Cubic.Out, duration: 1000, delay: 7500 });
+			$('#position-example').jQueryTween({ from: { position: {bottom: '24.5%'} }, to: { position: { bottom: '-100%' } }, easing: TWEEN.Easing.Cubic.InOut, duration: 1000, delay: 9000 }, function() { 
+				$('#position-example').css({bottom: 'auto', left: '-150%'}); 
 				$(bt).removeClass('btn-info disabled').addClass('btn-jtween').text('Play again' ); 
 			});
 		});
@@ -292,6 +310,47 @@
 			// var finalScroll = currentScroll - parseInt(delta*scrollAmount);
 			// $('body').jQueryTween( { to : { scroll: finalScroll }, easing: TWEEN.Easing.Circular.Out, duration : 400 } );
 		// });
+		
+		
+		// control tweens play/pause/stop
+		$('.btn-ctrle-start').on('click',function() {
+			var bt = $(this);
+			$(bt).removeClass('btn-jtween').addClass('btn-info disabled');
+			$('[class*=btn-ctrl-]').removeClass('hidden');
+			$('#control-example').addClass('animating');			
+			$('#control-example').jQueryTween({ from: { rotate: {y: -180,  z: 3600}, backgroundColor: '#158D36' }, to: { backgroundColor: '#159BD8', rotate: {y: 0, z: 0} }, easing: TWEEN.Easing.Quintic.Out, duration : 4000, yoyo:true }, function() {				
+				$(bt).removeClass('btn-info disabled').addClass('btn-jtween').text('Play Again');
+				$('#control-example').removeClass('animating');
+				$('[class*=btn-ctrl-]').addClass('hidden');
+			}, function(){
+				$(bt).text('Animating.. stop or pause?');				
+			});
+		});
+		$('.btn-ctrl-stop').on('click',function() {
+			$('#control-example').stop();
+			$('#control-example').jQueryTween({ to: { backgroundColor: '#158D36', rotate: {y: 0, z: 0} }, duration: 0, delay: 0 }); //reset styling also
+			$('#control-example').removeClass('animating');
+			
+			$('.btn-ctrle-start').removeClass('btn-info disabled').addClass('btn-jtween').text('Stopped.. play again?');
+			
+			$('[class*=btn-ctrl-]').addClass('hidden');
+			
+			$('.btn-ctrl-play-pause').removeClass('btn-success').addClass('btn-warning');
+			$('.btn-ctrl-play-pause').find('i.fa').removeClass('fa-play').addClass('fa-pause');
+		});
+		$('.btn-ctrl-play-pause').on('click',function() {
+			if ( $(this).hasClass('btn-warning')  && $('#control-example').hasClass('animating') ) {
+				$(this).removeClass('btn-warning').addClass('btn-success');
+				$(this).find('i.fa').removeClass('fa-pause').addClass('fa-play');
+				$('#control-example').pause();
+				$('.btn-ctrle-start').text('Animation is paused');
+			} else {
+				$(this).removeClass('btn-success').addClass('btn-warning');
+				$(this).find('i.fa').removeClass('fa-play').addClass('fa-pause');
+				$('#control-example').play();
+				$('.btn-ctrle-start').text('Animating.. stop or pause?');
+			}	
+		});		
 		
 		// easing functions	
 		$('#easing tbody tr').on('click', function(){

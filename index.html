@@ -51,6 +51,8 @@
 					</span>	
 					
 					<a title="Do some fancy stuff to entertain me!" class="btn btn-success btn-play">Demo</a>
+					<a title="Stop" class="btn btn-danger btn-stop hidden"><i class="fa fa-stop"></i></a>
+					<a title="Pause/Resume" class="btn btn-warning btn-play-pause hidden"><i class="fa fa-pause"></i></a>
 				</p>
 			</div>
 			<div class="col-xs-12 col-sm-6 test-col">
@@ -346,7 +348,7 @@ $('.selector').jQueryTween({ to: { backgroundPosition: { x: 90, y: 'center' } },
 	  
 	  
       <section id="position-tween" style="perspective: 400px;">
-        <h2>Animating Absolute Positioned Objects Example</h2>  
+        <h2>Animating Object Position Example</h2>  
 		
 		<div class="jumbotron" style="overflow: hidden; position: relative; height: 196px;">
 			<div id="position-example" class="example-object"> </div>
@@ -363,9 +365,11 @@ $('.selector').jQueryTween({ to: { position: { left: '-100%' } } });
 
 		<h4>Tips for usage</h4>
 		<ol type="a">
-		  <li><kbd>Notice</kbd> | unlike width and height, for positioning the script does not read the current values, you must always define <code>from</code>.</li>
+		  <li><kbd>Notice</kbd> | unlike <code>width</code> and <code>height</code>, for positioning the script does not read the current values, it will assume it's 0, so you must always define initial values in the <code>from</code> option. This is to avoid jumpy animations.</li>
+		  <li>In order to perform properly, make sure the parent element is set to <code>position: relative</code>.</li>
 		  <li>This effect can be used as fallback and replace <code>translate</code> for old browsers.</li>
 		  <li>The positioning animation accepts for all top, right, bottom, left values such as "150", "150px" or "150%".</li>
+		  <li>The positioning animation can work for both <code>position: absolute</code> and <code>position: relative</code> elements, except <code>top</code> and <code>bottom</code> only work for <code>absolute</code>.</li>
 		  <li>To have a smooth animation and prevent jumps, you must use values for both <code>from</code> and <code>to</code> in the exact same units for initial and target values.</li>
 		</ol>
 	  </section>
@@ -408,6 +412,37 @@ $(window).on('mousewheel DOMMouseScroll',function(e) {
 		<h4>Tips for usage</h4>
 		<ol type="a">
 		  <li>You don't want to use <code>yoyo</code> for this kind of stuff :D.</li>
+		  <li>The selector does not really matter since we only scroll the document.body.</li>
+		  <li>You may wanna check the <code>../assets/js/scripts.js</code> I used for these demos, the scrolling can get quite fun.</li>
+		</ol>
+	  </section>
+	  
+	  
+      <section id="control-tween">
+        <h2>Tween Manipulation Stop / Pause / Resume</h2>  
+		<div class="media" style="overflow: visible; perspective: 200px">
+		  <div id="control-example" class="example-object pull-left"></div>
+		  <div class="media-body">
+			  <p>In this example we are going to demonstrate the stop/pause/resume functions. The object is performing multiple tween instances for same object, as described in the </p>
+			  <p>You can pause / stop a tween or all tweens assigned to an object at any given time, and if paused, you can resume at any point in time.</p>
+			  <p>
+				  <a title="Start animation" class="btn btn-jtween btn-lg btn-ctrle-start" role="button">Start</a>
+				  <a title="Stop" class="btn btn-danger btn-lg btn-ctrl-stop hidden" role="button"><i class="fa fa-stop"></i></a>
+				  <a title="Play/Pause" class="btn btn-warning btn-lg btn-ctrl-play-pause hidden" role="button"><i class="fa fa-pause"></i></a>
+			  </p>      
+		  </div>
+		</div>
+
+		
+<pre>
+$('.selector').stop(); // stops all the object's tweens
+$('.selector').pause(); // pauses all the object's tweens 
+$('.selector').play(); // resumes all the object's tweens
+</pre>
+
+		<h4>Tips for usage</h4>
+		<ol type="a">
+		  <li>Make sure you check the <code>../assets/js/scripts.js</code> for more detailed usage.</li>
 		  <li>The selector does not really matter since we only scroll the document.body.</li>
 		  <li>You may wanna check the <code>scripts.js</code> I used for these demos, the scrolling can get quite fun.</li>
 		</ol>
@@ -577,10 +612,6 @@ $('.selector').jQueryTween( {to: { opacity: 0 } }, null, function() {
 			<h4 class="list-group-item-heading">Scroll events only work for <code>document.body</code> so far, no other option implemented.</h4>
 			<p class="list-group-item-text">This also can be changed easily but not really worth the effort.</p>
 		  </a>
-		  <a href="https://github.com/sole/tween.js/issues/154#issuecomment-58773172" class="list-group-item" target="_blank">
-			<h4 class="list-group-item-heading">Pause/Resume/Stop methods are <span class="label label-primary">not</span> implemented.</h4>
-			<p class="list-group-item-text">Only stop can be used, please click me for an example.</p>
-		  </a>
 		</div>	
       </section>
 	 
@@ -623,6 +654,7 @@ $('.selector').jQueryTween( {to: { opacity: 0 } }, null, function() {
 				<li><a href="#background-tween">Animating Background Position</a></li>
 				<li><a href="#position-tween">Animating Position</a></li>
 				<li><a href="#scroll-tween" >Scrolling Window</a></li>
+				<li><a href="#control-tween" >Stop / Pause / Resume</a></li>
 				<li><a href="#easing">Easing Functions</a></li>
 				<li><a href="#callbacks">Using Callbacks</a></li>
 				<li><a href="#usage">Usage Tips</a></li>
