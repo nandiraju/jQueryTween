@@ -443,8 +443,8 @@ $('.selector').play(); // resumes all the object's tweens
 		<h4>Tips for usage</h4>
 		<ol type="a">
 		  <li>Make sure you check the <code>../assets/js/scripts.js</code> for more detailed usage.</li>
-		  <li>The selector does not really matter since we only scroll the document.body.</li>
-		  <li>You may wanna check the <code>scripts.js</code> I used for these demos, the scrolling can get quite fun.</li>
+		  <li>The method controls all tween instances, so for instance when you pause, all tweens assigned to your object will pause.</li>
+		  <li>Sometimes pausing delayed tweens or <kbd>yoyo</kbd> enabled tweens, the callback functions will trigger prematurely on resume.</li>
 		</ol>
 	  </section>
 
