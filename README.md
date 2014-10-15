@@ -20,7 +20,8 @@ Get to know some features
 * can use all tween.js easing functions, can do delays and repeats, and more
 * supports callback functions to be used onUpdate or onComplete
 * performance tweaks, when only a few tween properties are used, the others don't update
-* for most properties you don't need to set an initial value, it gets it's current properties values, except transform 
+* for most properties you don't need to set an initial value, it gets it's current properties values, except transform
+* tween control: play/pause/stop
 * tween scrollTo events
 * tween text color and background-color
 * tween positions: top, bottom, left, right (for absolute position objects)
@@ -89,7 +90,6 @@ TO DO / known issues
 * tween to relative values (such as "+200" or "-150") does not work properly with some properties
 * tweening background position only works for percent values
 * tween chaining is not implemented
-* tween stop/play/pause is not implemented
 * does not tween text properties, spacing, etc, only what's shown in the examples
 * scroll events are only available for document.body, no other containers available
 
