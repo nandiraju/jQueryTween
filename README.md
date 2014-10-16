@@ -4,10 +4,12 @@ Lightest Tweening Engine for jQuery
 
 Why jQueryTween?
 ======
-* A simple plugin to easily bridge tween.js with jQuery, and for jQuery users, makes work alot easier. Imagine writing init(), animate() and update() over and over again?
-* It's about 8k minified and plus 6k of tween.js, you can do a ton of cool things without the need to use expensive or complicated animation engines.
+* A super light &amp; simple jQuery plugin that works as a controller for <code>tween.js</code> (javascript animation engine), and for jQuery users, makes work alot easier. Imagine writing <code>init()</code>, <code>animate()</code> and <code>update()</code> over and over again?
+* Supports most popular transitions such as <code>transform</code>, <code>opacity</code>, <code>color</code> and <code>backgroundPosition</code> for up to <code>60</code> frames per second.
+* Can also do smooth <code>scrollTo</code>
+* It's about <code>8k</code> minified and plus <code>6k</code> of <code>tween.js</code>, you can do a ton of cool things without the need to use expensive or complicated animation engines.
 * This one is simple, light and I dare to say it's much more performance driven when it comes to simple tweens. 
-* Keep in mind that tween.js is not included into the jQueryTween plugin. You will have to download at source.
+* Keep in mind that <code>tween.js</code> is not included into the jQueryTween plugin, except for the AIO package. See demo for details.
 
 DEMO
 ======
@@ -17,19 +19,21 @@ DEMO
 Get to know some features
 ======
 * works with jQuery, yes I know it's cool for n00bs and scary for advanced devs
-* can use all tween.js easing functions, can do delays and repeats, and more
-* supports callback functions to be used onUpdate or onComplete
-* performance tweaks, when only a few tween properties are used, the others don't update
-* for most properties you don't need to set an initial value, it gets it's current properties values, except transform
+* developer friendly and heavily documented
+* commercial use friendly license
+* can use all tween.js easing functions, can do delays and repeats
+* supports callback functions to be used for <code>onUpdate</code> or <code>onComplete</code> events
+* <code>performance</code> tweaks, when only a few tween properties are used, the others don't update
+* for most properties you don't need to set an initial value, it gets it's current properties values, except <code>transform</code> (translate,rotate,scale) and <code>position</code> (top,right,bottom,left)
 * tween control: play/pause/stop
-* tween scrollTo events
-* tween text color and background-color
-* tween positions: top, bottom, left, right (for absolute position objects)
-* tween background position, but only when using percent values for X and Y
-* tween transform translate2d or translate3d
-* tween transform rotate2d or rotate3d
-* tween transform scale
-* tween opacity 
+* tween <code>scrollTo</code> events
+* tween text <code>color</code> and <code>background-color</code>
+* tween <code>position</code>: top, bottom, left, right (for absolute/relative positioned objects)
+* tween <code>background-position</code>, but only when using percent values for X and Y
+* tween <code>transform</code> <code>translate2d</code> or <code>translate3d</code>
+* tween <code>transform</code> - <code>rotate</code>
+* tween <code>transform</code> - <code>scale</code>
+* tween <code>opacity</code>
  
  
 Quick Example 
@@ -59,7 +63,7 @@ $('#selector').jQueryTween({
 	}, 
 	repeat: 2, // can be number or 'Infinity'
 	duration: 1500,
-	easing: 'TWEEN.Easing.Exponential.InOut', // my favorite
+	easing: TWEEN.Easing.Exponential.InOut, // my favorite
 	delay: 500,
 }, function() {
 	//do some cool stuff when tween finished animating
@@ -85,6 +89,17 @@ $('a#button').on('click', function(e) {
 </pre>
 
 
+Tween Control
+======
+<pre>// stops all the object's tweens
+$('.selector').stop();
+ // pauses all the object's tweens 
+$('.selector').pause();
+// resumes all the object's tweens
+$('.selector').play(); 
+</pre>
+
+
 TO DO / known issues
 ======
 * tween to relative values (such as "+200" or "-150") does not work properly with some properties
@@ -95,8 +110,8 @@ TO DO / known issues
 
 License
 ======
-jQuery Tween is licensed under MIT.
+jQueryTween is licensed under MIT.
 
 You want to support the project?
 ======
-Please feel free to donate 
+Please feel free to fork, report issues or donate. 
