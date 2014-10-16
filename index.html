@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=500" />
 	<meta name="keywords" content="jQueryTween, tween.js, jQuery, example, tweening engine, javascript animation engine, animation engine" />
 	<meta name="author"	content="Dan Partac" />
-	
+	<link rel="icon" type="image/png" href="./assets/img/favicon.png">
 	<title>jQueryTween - Lightest Tweening Engine for jQuery</title>
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet'>	
 
@@ -27,7 +27,7 @@
 <div id="site-wrapper">
 	<header id="header">
 	  <div class="container">
-		<h1 class="pull-left">jQuery<strong>Tween</strong></h1>
+		<h1 class="pull-left"><span class="hidden">jQueryTween - Lightest Tweening Engine for jQuery </span>jQuery<strong>Tween</strong></h1>
 		<div id="mainnav" class="btn-toolbar pull-right" role="toolbar">
 		
 			<a id="donate-link" title="Please Donate" href="bitcoin:138F8t1gb5FYtTk6FqNbXCNBCkCx5JZon7" class="btn btn-donate donate-link" data-toggle="popover" data-placement="auto"><i class="fa fa-bitcoin"></i> Donate</a>
@@ -40,7 +40,7 @@
 	  <div class="container">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
-				<h1><small>Welcome to</small><br>jQuery<strong>Tween</strong>!!</h1>
+				<h1><small>Welcome to</small><br><span class="hidden">jQueryTween - Lightest Tweening Engine for jQuery </span> jQuery<strong>Tween</strong>!!</h1>
 				<h2>The Lightest Tweening Engine for jQuery</h2>
 				<p class="lead">This plugin is a bridge to <kbd>tween.js</kbd> and aims to drastically simplify your work. Each script does what it does best, for high performance hardware accelerated animations.</p>
 				<p>
@@ -51,8 +51,6 @@
 					</span>	
 					
 					<a title="Do some fancy stuff to entertain me!" class="btn btn-success btn-play">Demo</a>
-					<a title="Stop" class="btn btn-danger btn-stop hidden"><i class="fa fa-stop"></i></a>
-					<a title="Pause/Resume" class="btn btn-warning btn-play-pause hidden"><i class="fa fa-pause"></i></a>
 				</p>
 			</div>
 			<div class="col-xs-12 col-sm-6 test-col">
@@ -426,9 +424,9 @@ $(window).on('mousewheel DOMMouseScroll',function(e) {
 			  <p>In this example we are going to demonstrate the stop/pause/resume functions. The object is performing multiple tween instances for same object, as described in the </p>
 			  <p>You can pause / stop a tween or all tweens assigned to an object at any given time, and if paused, you can resume at any point in time.</p>
 			  <p>
-				  <a title="Start animation" class="btn btn-jtween btn-lg btn-ctrle-start" role="button">Start</a>
-				  <a title="Stop" class="btn btn-danger btn-lg btn-ctrl-stop hidden" role="button"><i class="fa fa-stop"></i></a>
 				  <a title="Play/Pause" class="btn btn-warning btn-lg btn-ctrl-play-pause hidden" role="button"><i class="fa fa-pause"></i></a>
+				  <a title="Stop" class="btn btn-danger btn-lg btn-ctrl-stop hidden" role="button"><i class="fa fa-stop"></i></a>
+				  <a title="Start animation" class="btn btn-jtween btn-lg btn-ctrle-start" role="button">Start</a>
 			  </p>      
 		  </div>
 		</div>

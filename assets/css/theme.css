@@ -53,7 +53,7 @@ h1 small { letter-spacing: -2px; } h2 small { letter-spacing: -1px; } h3 small {
 
 /* additional buttons */
 .btn { transition: all 0.4s ease 0s; -webkit-transition: all 0.4s ease 0s; margin-bottom: 4px }
-
+.btn i { width: 18px; text-align:center }
 .btn-jtween { color: #ffffff; background-color: #ec1e71; border-color: #e11d6c;}
 .btn-jtween:hover,.btn-jtween:focus,.btn-jtween:active,.btn-jtween.active,.open > .dropdown-toggle.btn-jtween { color: #ffffff; background-color: #e11c6c; border-color: #d41a65;}
 .btn-jtween:active,.btn-jtween.active,.open > .dropdown-toggle.btn-jtween { background-image: none;}
