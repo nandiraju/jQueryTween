@@ -26,21 +26,21 @@ Get to know some features
 * <code>performance</code> tweaks, when only a few tween properties are used, the others don't update
 * for most properties you don't need to set an initial value, it gets it's current properties values, except <code>transform</code> (translate,rotate,scale) and <code>position</code> (top,right,bottom,left)
 * tween control: play/pause/stop
-* tween <code>scrollTo</code> events
+* tween <code>scrollTo</code> window or target
 * tween text <code>color</code> and <code>background-color</code>
 * tween <code>position</code>: top, bottom, left, right (for absolute/relative positioned objects)
 * tween <code>background-position</code>, but only when using percent values for X and Y
-* tween <code>transform</code> <code>translate2d</code> or <code>translate3d</code>
-* tween <code>transform</code> - <code>rotate</code>
+* tween <code>transform</code> - <code>translate3d</code>
+* tween <code>transform</code> - <code>rotateX</code>, <code>rotateY</code>, <code>rotateZ</code>
 * tween <code>transform</code> - <code>scale</code>
 * tween <code>opacity</code>
  
  
 Quick Example 
 ======
- <pre>//Simple example jQueryTween syntax, very simple indeed
+<pre>//Simple example jQueryTween syntax, very simple indeed
  $('#selector').jQueryTween({ to: { opacity: 0.5, translate: {y: 50} }, duration: 700 });
- </pre>
+</pre>
  
 Please notice that it's best to use a unique ID selector to perform an jQueryTween animation,
 you don't want all your things to fly around.
